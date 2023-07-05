@@ -29,5 +29,18 @@
 
         </h:form>
 
+        <script type="text/javascript">
+            if (PrimeFaces.widget.Poll) {
+                var unloadEvent = ("onpagehide" in window) ? "pagehide" : "unload";
+                $(window).on(unloadEvent, function() {
+                    for (item in PrimeFaces.widgets) {
+                        widget = PrimeFaces.widgets[item];
+                        if (widget instanceof PrimeFaces.widget.Poll) {
+                            widget.stop();
+                        }
+                    }
+                });
+            };
+        </script>
     </h:body>
 </html>
