@@ -14,19 +14,9 @@
     </h:head>
     <h:body>
 
-        <h1>Poll test</h1>
-        <p:link outcome="test1.xhtml" value="Goto Second Page">
-        </p:link>
-        <h:outputText value="#{testView.registerOmnifaces()}" />
-        <h:form id="frmTest">
-
-            <p:poll id="poller"
-                    interval="5"
-                    update="@form"
-                    process="@this"
-                    global="false"
-            />
-
+        <h1>Second page</h1>
+        <h:form id="frmTest2">
+            <h:outputText value="#{testView.getGetOneSecondText()}" />
         </h:form>
 
     </h:body>

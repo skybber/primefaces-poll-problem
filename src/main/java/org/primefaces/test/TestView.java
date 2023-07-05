@@ -7,12 +7,11 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import javax.annotation.PostConstruct;
-import javax.faces.view.ViewScoped;
+import javax.annotation.PreDestroy;
 import javax.inject.Named;
 
-import lombok.Data;
+import org.omnifaces.cdi.ViewScoped;
 
-@Data
 @Named
 @ViewScoped
 public class TestView implements Serializable {
@@ -21,17 +20,31 @@ public class TestView implements Serializable {
     private Integer integer;
     private BigDecimal decimal;
     private LocalDateTime localDateTime;
-    private List<TestObject> list;
-    
+
     @PostConstruct  
     public void init() {
         string = "Welcome to PrimeFaces!!!";
-        list = new ArrayList<>(Arrays.asList(
-                new TestObject("Thriller", "Michael Jackson", 1982),
-                new TestObject("Back in Black", "AC/DC", 1980),
-                new TestObject("The Bodyguard", "Whitney Houston", 1992),
-                new TestObject("The Dark Side of the Moon", "Pink Floyd", 1973)
-        ));
+    }
+
+    @PreDestroy
+    public void destroy() {
+        System.out.println("Destroyed.");
+    }
+
+    public String getGetOneSecondText()
+    {
+        try
+        {
+            Thread.sleep(1000);
+        }
+        catch (InterruptedException e)
+        {
+        }
+        return "One second text";
+    }
+
+    public void registerOmnifaces() {
+        System.out.println("OF registered");
     }
 
 }
